@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    min-height: 100%;
+    background: radial-gradient(rgb(5, 193, 255), rgb(171, 234, 255))
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: rgba(209, 247, 255, 0.826);
+    margin: auto;
+    padding: 2rem;
+    border-radius: 20px;
+    width: min-content;
+}
+
+#screen {
+    height: 4rem;
+    font-size: 2rem;
+    text-align: end;
+    align-content: center;
+    background-color: white;
+    border-style: inset;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    justify-content: end;
+    gap: 5px
+}
+
+.button {
+    border-radius: 8px;
+    font-size: 2rem;
+    align-content: center;
+    background-color: white;
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid black;
+}
+
+.button:hover {
+    background-color: rgb(222, 222, 222);
+}
