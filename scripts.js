@@ -18,7 +18,7 @@ const operations = {
     "x": multiply,
 }
 
-let 
+let has_op = false;
 
 function add(a, b) {
     return a + b;
@@ -37,22 +37,31 @@ function operate(a, b, op) {
     return operations[op](a, b);
 }
 
+function parseExpression() {
+    let [left, op, right] = display.textContent.split(" ")
+    return [parseFloat(left), op, parseFloat(right)]
+}
+
 function numberButtonClick(event) {
     text = display.textContent;
     display.textContent = display.textContent + event.target.textContent;
 }
 
 function opButtonClick(event) {
+    if (has_op) {
+        return
+    }
+    has_op = true;
     op = event.target.textContent;
     text = display.textContent;
     display.textContent = text + " " + op + " ";
 }
 
 function eqButtonClick(event) {
-    let [left, op, right] = display.textContent.split(" ");
-    console.log(display.textContent);
-    result = operate(parseInt(left), parseInt(right), op);
+    let [left, op, right] = parseExpression()
+    result = operate(left, right, op);
     display.textContent = result;
+    has_op = false
 }
 
 
