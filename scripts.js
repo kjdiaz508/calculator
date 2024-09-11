@@ -2,12 +2,18 @@ const display = document.querySelector("#screen");
 const calculator = document.querySelector(".container");
 calculator.addEventListener("click", (e) => {
     const btnType = e.target.getAttribute("class");
+    if (btnType === "clear button"){
+        clearButtonClick(e);
+    }
+    if (require_clear) {
+        return;
+    }
     if (btnType === "number button") {
         numberButtonClick(e);
     } else if (btnType === "op button") {
-        opButtonClick(e)
+        opButtonClick(e);
     } else if (btnType === "eq button") {
-        eqButtonClick(e)
+        eqButtonClick(e);
     }
 });
 
@@ -19,7 +25,8 @@ const operations = {
 }
 
 let has_op = false;
-let can_eval = false
+let can_eval = false;
+let require_clear = false;
 
 function add(a, b) {
     return a + b;
@@ -43,12 +50,21 @@ function parseExpression() {
     return [parseFloat(left), op, parseFloat(right)]
 }
 
+function displayError(text) {
+    display.textContent = text;
+    require_clear = true;
+}
+
 function evalScreen() {
     let [left, op, right] = parseExpression()
+    if (right === 0 && op === "/"){
+        displayError("can't divide by 0!")
+        return;
+    }
     result = operate(left, right, op);
     display.textContent = result;
-    has_op = false
-    can_eval = false
+    has_op = false;
+    can_eval = false;
 }
 
 function numberButtonClick(event) {
@@ -62,7 +78,7 @@ function numberButtonClick(event) {
 function opButtonClick(event) {
     if (has_op) {
         if (can_eval){
-            evalScreen()
+            evalScreen();
         }
     }
     has_op = true;
@@ -71,8 +87,20 @@ function opButtonClick(event) {
     display.textContent = text + " " + op + " ";
 }
 
+function clearScreen() {
+    display.textContent = "";
+    has_op = false;
+    can_eval = false;
+    require_clear = false;
+}
+
+/* wrappers for consistency and because they may be useful later */
 function eqButtonClick(event) {
-    evalScreen()
+    evalScreen();
+}
+
+function clearButtonClick(event){
+    clearScreen();
 }
 
 
