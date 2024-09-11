@@ -16,19 +16,24 @@ body {
 }
 
 .container {
+    width: 360px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 5px;
     background-color: rgba(209, 247, 255, 0.826);
     margin: auto;
     padding: 2rem;
     border-radius: 20px;
-    width: min-content;
 }
 
 #screen {
-    height: 4rem;
-    font-size: 2rem;
+    word-wrap: break-word;
+    overflow: scroll;
+    overscroll-behavior: contain;
+    height: 5rem;
+    font-size: 2.5rem;
     text-align: end;
     align-content: center;
     background-color: white;
@@ -39,19 +44,19 @@ body {
 
 .button-row {
     display: flex;
-    justify-content: end;
+    width: 100%;
     gap: 5px
 }
 
 .button {
-    border-radius: 8px;
+    flex: 1;
+    aspect-ratio: 1 / 1;
     font-size: 2rem;
     align-content: center;
     background-color: white;
     text-align: center;
-    width: 4rem;
-    height: 4rem;
     border: 1px solid black;
+    border-radius: 20%;
 }
 
 .button:hover {
