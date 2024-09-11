@@ -19,6 +19,7 @@ const operations = {
 }
 
 let has_op = false;
+let can_eval = false
 
 function add(a, b) {
     return a + b;
@@ -42,14 +43,27 @@ function parseExpression() {
     return [parseFloat(left), op, parseFloat(right)]
 }
 
+function evalScreen() {
+    let [left, op, right] = parseExpression()
+    result = operate(left, right, op);
+    display.textContent = result;
+    has_op = false
+    can_eval = false
+}
+
 function numberButtonClick(event) {
     text = display.textContent;
     display.textContent = display.textContent + event.target.textContent;
+    if (has_op) {
+        can_eval = true;
+    }
 }
 
 function opButtonClick(event) {
     if (has_op) {
-        return
+        if (can_eval){
+            evalScreen()
+        }
     }
     has_op = true;
     op = event.target.textContent;
@@ -58,10 +72,7 @@ function opButtonClick(event) {
 }
 
 function eqButtonClick(event) {
-    let [left, op, right] = parseExpression()
-    result = operate(left, right, op);
-    display.textContent = result;
-    has_op = false
+    evalScreen()
 }
 
 
