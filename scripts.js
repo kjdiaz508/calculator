@@ -61,7 +61,15 @@ function evalScreen() {
         displayError("can't divide by 0!")
         return;
     }
-    result = operate(left, right, op);
+    let result = operate(left, right, op);
+    let temp = String(result);
+    let len = temp.length;
+
+    if (len > 13 && temp.includes(".")){
+        let numDecimals = 13 - temp.indexOf(".") + 1
+        result = result.toFixed(numDecimals)
+    }
+    
     display.textContent = result;
     has_op = false;
     can_eval = false;
